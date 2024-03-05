@@ -11,15 +11,15 @@
     "vue3",
     "vite"
   ],
-  "homepage": "https://github.com/joooooooojo/kk-form/blob/master/README.md",
+  "homepage": "https://github.com/joooooooojo/k-form/blob/master/README.md",
   "bugs": {
-    "url": "https://github.com/joooooooojo/kk-form/issues"
+    "url": "https://github.com/joooooooojo/k-form/issues"
   },
   "license": "MIT",
   "author": "joooooooooojo",
   "repository": {
     "type": "git",
-    "url": "https://github.com/joooooooojo/kk-form.git"
+    "url": "https://github.com/joooooooojo/k-form.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -35,10 +35,14 @@
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
     },
+    "./volar": {
+      "types": "./volar.d.ts"
+    },
     "./*": "./*"
   },
   "files": [
-    "dist"
+    "dist",
+    "volar.d.ts"
   ],
   "style": "dist/style.css",
   "sideEffects": false,
@@ -50,16 +54,13 @@
     "publish": "npm pub"
   },
   "dependencies": {
-    "@rollup/plugin-terser": "^0.4.4",
-    "@types/node": "^20.11.24",
-    "dayjs": "^1.11.10",
-    "element-plus": "^2.5.6",
-    "lodash": "^4.17.21",
-    "prettier": "^3.2.5",
-    "vue": "^3.4.19"
+    "vue": "^3.4.19",
+    "element-plus": "^2.5.6"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.202",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^20.11.24",
+    "prettier": "^3.2.5",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
     "typescript": "^5.2.2",

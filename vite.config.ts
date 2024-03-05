@@ -12,10 +12,9 @@ function getConfigs(): UserConfig {
         build: {
           lib: {
             entry: resolve(__dirname, "packages/index.ts"),
-            name: "KKForm",
+            name: "KForm",
             fileName: format => `index.${format}.js`
           },
-          // https://rollupjs.org/guide/en/#big-list-of-options
           rollupOptions: {
             treeshake: true,
             external: ["vue", "element-plus"],

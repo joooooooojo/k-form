@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import FormItem from "../FormItem/index.vue";
 import { FormInstance } from "element-plus";
-import { onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { onBeforeUnmount, onMounted, ref, useSlots, watch } from "vue";
 import { formatPx } from "../../index";
 import { KFormProps } from "../../types/form-props";
 import { KDynamicFormItemProps } from "../../types/form-item-props";
@@ -58,6 +58,7 @@ const initDynamic = () => {
   });
   dynamic_options.value = ls;
 };
+const slots = useSlots();
 onMounted(() => {
   initDynamic();
 });
@@ -85,11 +86,11 @@ onBeforeUnmount(() => {
     @validate="onValidate"
   >
     <template v-for="item in options" :key="item.prop">
-      <FormItem
-        v-bind="item"
-        v-model="modelValue"
-        v-if="!item.children"
-      ></FormItem>
+      <FormItem v-bind="item" v-model="modelValue" v-if="!item.children">
+        <template v-if="item.type === 'custom'" v-slot:[item.slotName]>
+          <slot :name="item.slotName"> </slot>
+        </template>
+      </FormItem>
       <div
         class="k-form-row"
         :key="item.rowKey"
@@ -105,7 +106,11 @@ onBeforeUnmount(() => {
           v-bind="item"
           v-for="child in item.children"
           :key="child.prop"
-        ></FormItem>
+        >
+          <template v-if="item.type === 'custom'" v-slot:[item.slotName]>
+            <slot :name="item.slotName"> </slot>
+          </template>
+        </FormItem>
       </div>
     </template>
   </el-form>

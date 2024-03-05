@@ -25,11 +25,11 @@ app.mount("#app");
 ### 类型声明（src/components.d.ts）
 
 ```ts
-import KForm from "@joooooooooojo/kform";
-
-declare module '@vue/runtime-core' {
-  export interface GlobalComponents  {
+import KForm  from '@joooooooooojo/kform'
+declare module "@vue/runtime-core" {
+  export interface GlobalComponents {
     KForm: typeof KForm
   }
 }
+
 ```

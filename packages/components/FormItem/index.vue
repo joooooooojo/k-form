@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import dayjs from "dayjs";
-import lodash from "lodash";
+import { computed } from "vue";
 import { KFormItemProps } from "../../types/form-item-props";
 
 const props = withDefaults(defineProps<KFormItemProps>(), {
@@ -19,24 +17,6 @@ const isShow = (show: KFormItemProps["show"]): boolean => {
     return show;
   } else {
     return show(model.value);
-  }
-};
-
-const onDatePickerChange = (event, prop) => {
-  if (props.payload.rangeKeys) {
-    const [start, end] = event;
-    model.value[props.payload.rangeKeys[0]] = event
-      ? dayjs(start).valueOf()
-      : null;
-    model.value[props.payload.rangeKeys[1]] = event
-      ? dayjs(end).valueOf()
-      : null;
-  } else {
-    if (Array.isArray(event)) {
-      model.value[prop] = event.map(item => dayjs(item).valueOf());
-      return;
-    }
-    model.value[prop] = dayjs(event).valueOf();
   }
 };
 
@@ -89,13 +69,8 @@ const getRules = () => {
       <el-date-picker
         v-if="type === 'date-picker'"
         v-bind="payload"
-        :model-value="
-          payload.rangeKeys
-            ? [model[payload.rangeKeys[0]], model[payload.rangeKeys[1]]]
-            : model[prop]
-        "
+        v-model="model[prop]"
         :disabled="_disabled()"
-        @update:model-value="event => onDatePickerChange(event, prop)"
         @change="payload.onChange"
         @blur="payload.onBlur"
         @focus="payload.onFocus"
@@ -176,6 +151,7 @@ const getRules = () => {
         @blur="payload.onBlur"
         @focus="payload.onFocus"
       />
+      <slot v-else-if="type === 'custom'" :name="slotName" />
       <el-input
         v-else
         v-bind="payload"

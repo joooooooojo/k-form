@@ -18,14 +18,14 @@ type KFormProps = {
   rules?: FormRules;
   /** 表单标签位置 */
   labelPosition?: KLabelPosition;
-  /** 标签的长度，例如 '50px',传入number类型直接默认为px单位。 作为 Form 直接子元素的 form-item 会继承该值。 可以使用 auto。 */
-  labelWidth?: KRequiredAsteriskPosition;
+  /** 标签的长度，例如 '50px',传入number类型默认为px单位。 作为 Form 直接子元素的 form-item 会继承该值。 可以使用 auto。 */
+  labelWidth?: string | number;
   /** 表单域标签的后缀 */
   labelSuffix?: string;
   /** 是否显示必填字段的标签旁边的红色星号 */
   hideRequiredAsterisk?: boolean;
   /** 星号的位置 */
-  requiredAsteriskPosition?: string;
+  requiredAsteriskPosition?: KRequiredAsteriskPosition;
   /** 是否以行内形式展示校验信息 */
   inlineMessage?: boolean;
   /** 是否在输入框中显示校验结果反馈图标 */

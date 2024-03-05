@@ -21,7 +21,7 @@ type SelectOptionType = {
 
 /** 表单项类型 **/
 type KFormItemPropsType =
-  | "custom" // 自定义组件，传入slotName
+  | "custom" // 自定义插槽，必须传入slotName
   | "switch"
   | "color"
   | "select"
@@ -167,6 +167,8 @@ type KFormItemProps<T = any> = {
   show?: boolean | ((formValue: T) => boolean);
   /** 载荷，不同表单项类型有不同载荷，使用时手动指定特定类型 **/
   payload?: any;
+  /** 插槽 **/
+  slotName?: string;
 };
 
 export type {
