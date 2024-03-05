@@ -1,7 +1,7 @@
 // Auto generated component declarations
 declare module "vue" {
   export interface GlobalComponents {
-    KKForm: typeof import("@joooooooooojo/form")["KKForm"];
+    KForm: (typeof import("@joooooooooojo/form"))["KForm"];
   }
 }
 

@@ -1,42 +1,23 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "Node",
-    "strict": false,
+    "target": "ESNext",
+    "module": "ESNext",
     "jsx": "preserve",
-    "importHelpers": true,
-    "experimentalDecorators": true,
-    "strictFunctionTypes": false,
+    "moduleResolution": "bundler",
+    "lib": ["DOM", "ESNext"],
     "skipLibCheck": true,
-    "esModuleInterop": true,
     "isolatedModules": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "allowJs": false,
     "resolveJsonModule": true,
-    "lib": [
-      "dom",
-      "esnext"
-    ],
-    "types": [
-      "node",
-      "vite/client",
-      "element-plus/global"
-    ]
+    "types": ["node", "vite/client", "element-plus/global"]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "types/*.d.ts",
-    "vite.config.ts"
+    "packages/**/**/*",
+    "packages/**/*",
+    "src/*.ts",
+    "src/*.tsx",
+    "src/*.vue",
+    "vite.config.ts",
+    "volar.d.ts"
   ],
-  "exclude": [
-    "lib",
-    "**/*.js",
-    "node_modules"
-  ]
+  "exclude": ["node_modules", "dist"]
 }
