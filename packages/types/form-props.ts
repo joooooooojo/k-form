@@ -40,7 +40,7 @@ type KFormProps = {
   scrollToError?: boolean;
   /** 当校验有失败结果时，滚动到第一个失败的表单项目 可通过 [scrollIntoView](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) 配置*/
   scrollIntoViewOptions?: object | boolean;
-  /** 表单验证触发时调用*/
+  /** 表单校验触发时调用*/
   onValidate?: () => void;
 };
 
