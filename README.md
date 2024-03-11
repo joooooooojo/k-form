@@ -8,7 +8,7 @@ yarn add @joooooooooojo/kform
 pnpm add @joooooooooojo/kform
 ```
 ## 说明
-`KForm是一个配置优先的表单组件，它是基于Vue3，ElementPlus的el-form组件进行封装的，所以在使用KForm之前，请详细阅读[ElementPlus的表单组件文档](https://element-plus.gitee.io/zh-CN/component/form.html)。`
+`KForm是一个配置优先的表单组件，它是基于Vue3，ElementPlus的el-form组件进行封装的，所以在使用KForm之前，请详细阅读`[ElementPlus的表单组件文档](https://element-plus.gitee.io/zh-CN/component/form.html)。
 
 ### 全局注册（src/main.ts）
 
