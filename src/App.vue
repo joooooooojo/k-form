@@ -36,6 +36,9 @@ const options: Array<KFormItemProps> = [
     } as DatePickerPropsPayload
   },
   {
+    rowKey: "row-1"
+  },
+  {
     type: "custom",
     slotName: "avatar"
   }
