@@ -122,7 +122,6 @@ const options:Array<KFormItemProps> = [
 | --- | --- | --- |
 | `width` | `string` | 表单宽度 默认100% |
 | `options` | `Array<KFormItemProps>` | 表单项配置 |
-| `dynamicOptions` | `KDynamicFormItemProps` | 动态表单配置(优先级高) |
 | `modelValue` | `Record<string, any>` | 表单数据模型 |
 | `rules` | `FormRules` | 表单校验规则 |
 | `labelPosition` | `KLabelPosition` | 表单标签位置 |

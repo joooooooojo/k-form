@@ -120,14 +120,6 @@ type RadioPropsPayload<T = any> = Merge<
   }
 >;
 
-interface KDynamicFormItemProps<T = any> extends KFormItemProps {
-  next?: (
-    formValue?: T,
-    currentKey?: string
-  ) => KDynamicFormItemProps<T> | null;
-  parent?: KDynamicFormItemProps<T> | null;
-}
-
 type KFormItemProps<T = any> = {
   /** 和element原 prop不同只允许填写字符串，同时充当键名和校验的prop **/
   prop?: string;
@@ -173,7 +165,6 @@ type KFormItemProps<T = any> = {
 
 export type {
   KFormItemProps,
-  KDynamicFormItemProps,
   KFormItemPropsType,
   InputPropsPayload,
   InputNumberPropsPayload,
