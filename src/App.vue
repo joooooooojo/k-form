@@ -40,14 +40,21 @@ const clientType = (formValue?: T): KDynamicFormItemProps => {
 };
 
 const code = (): KDynamicFormItemProps => {
-  return {
-    rowKey: "row-2",
-    childrenNum: 2,
-    parent: clientType,
-    label: "企业信用代码",
-    prop: "code",
-    next: null
-  };
+  return [
+    {
+      rowKey: "row-2",
+      children: [
+        {
+          label: "企业信用代码",
+          prop: "code"
+        },
+        {
+          label: "企业信用代码",
+          prop: "code"
+        }
+      ]
+    }
+  ];
 };
 </script>
 

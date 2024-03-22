@@ -28,15 +28,6 @@ app.mount("#app");
 ```
 
 ### 类型声明（src/components.d.ts）
-
-```ts
-import KForm  from '@joooooooooojo/kform'
-declare module "@vue/runtime-core" {
-  export interface GlobalComponents {
-    KForm: typeof KForm
-  }
-}
-```
 如果您在使用volar，那么可以在tsconfig.json中添加以下配置
 ```json
 {

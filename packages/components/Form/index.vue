@@ -54,7 +54,7 @@ const watcher = watch(
     getDynamicList(props.dynamicOptions());
     const ls = [];
     _dynamicOptions.value.map(item => {
-      if (item.rowKey) {
+      if (item.rowKey && !item.children) {
         const row = ls.find(lsItem => lsItem.rowKey === item.rowKey);
         if (!row) {
           ls.push({
