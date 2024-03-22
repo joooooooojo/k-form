@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import FormItem from "../FormItem/index.vue";
-import { type Arrayable, FormInstance } from "element-plus";
+import { FormInstance } from "element-plus";
 import { computed, onBeforeUnmount, ref, watch } from "vue";
 import { formatPx, KDynamicFormItemProps } from "../../index";
 import { KFormProps } from "../../types/form-props";
+type Arrayable<T> = T | T[];
 defineOptions({
   name: "KForm"
 });
@@ -30,14 +31,14 @@ function getDynamicList(dynamicItem: Arrayable<KDynamicFormItemProps>) {
     _dynamicOptions.value.push(...dynamicItem);
     dynamicItem.forEach(item => {
       if (item.next) {
-        getDynamicList(item.next(modelValue.value, item.key));
+        getDynamicList(item.next(modelValue.value, item.prop));
       }
     });
     return;
   }
   _dynamicOptions.value.push(dynamicItem);
   if (dynamicItem.next) {
-    getDynamicList(dynamicItem.next(modelValue.value, dynamicItem.key));
+    getDynamicList(dynamicItem.next(modelValue.value, dynamicItem.prop));
   }
 }
 const _options = computed(() => {

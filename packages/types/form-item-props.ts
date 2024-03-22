@@ -11,7 +11,7 @@ import {
   RadioProps,
   SwitchProps
 } from "element-plus";
-import { Arrayable } from "element-plus";
+type Arrayable<T> = T | T[];
 
 type SelectOptionType = {
   label: string;
@@ -166,7 +166,7 @@ type KFormItemProps<T = any> = {
 interface KDynamicFormItemProps extends KFormItemProps {
   next?:
     | ((
-        formValue?: T,
+        formValue?: any,
         currentKey?: string
       ) => KDynamicFormItemProps | Array<KDynamicFormItemProps>)
     | null;

@@ -1,9 +1,10 @@
-import { FormRules, Arrayable } from "element-plus";
+import { FormRules } from "element-plus";
 import { KDynamicFormItemProps, KFormItemProps } from "./form-item-props";
 
 type KLabelPosition = "top" | "right" | "left";
 type KRequiredAsteriskPosition = "right" | "left";
 type KFormItemSize = "default" | "small" | "large";
+type Arrayable<T> = T | T[];
 
 type KFormProps = {
   /** 表单宽度 默认100% */
@@ -45,6 +46,7 @@ type KFormProps = {
 };
 
 export type {
+  Arrayable,
   KFormProps,
   KFormItemSize,
   KLabelPosition,

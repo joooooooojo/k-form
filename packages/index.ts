@@ -12,7 +12,6 @@ export const KForm = Object.assign(Form, {
     app.component(Form.name, Form);
   }
 });
-
 export default KForm;
 export type {
   KFormItemProps,
@@ -29,6 +28,7 @@ export type {
   SelectOptionType
 } from "./types/form-item-props";
 export type {
+  Arrayable,
   KFormProps,
   KFormItemSize,
   KLabelPosition,
