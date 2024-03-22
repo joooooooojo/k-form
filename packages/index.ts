@@ -16,7 +16,8 @@ export const KForm = Object.assign(Form, {
 export default KForm;
 export type {
   KFormItemProps,
-  KFormItemPropsType,
+  KFormItemType,
+  KDynamicFormItemProps,
   InputPropsPayload,
   InputNumberPropsPayload,
   ISelectPropsPayload,

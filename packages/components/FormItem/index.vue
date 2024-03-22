@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { KFormItemProps } from "../../types/form-item-props";
 
 const props = withDefaults(defineProps<KFormItemProps>(), {
@@ -146,7 +146,7 @@ const getRules = () => {
       <el-input-number
         v-bind="payload"
         v-model="model[prop]"
-        v-else-if="type === 'number-input'"
+        v-else-if="type === 'number'"
         @change="payload.onChange"
         @blur="payload.onBlur"
         @focus="payload.onFocus"

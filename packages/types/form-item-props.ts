@@ -11,7 +11,7 @@ import {
   RadioProps,
   SwitchProps
 } from "element-plus";
-import { Arrayable } from "element-plus/es/utils";
+import { Arrayable } from "element-plus";
 
 type SelectOptionType = {
   label: string;
@@ -20,7 +20,7 @@ type SelectOptionType = {
 };
 
 /** 表单项类型 **/
-type KFormItemPropsType =
+type KFormItemType =
   | "custom" // 自定义插槽，必须传入slotName
   | "switch"
   | "color"
@@ -29,7 +29,7 @@ type KFormItemPropsType =
   | "date-picker"
   | "input"
   | "radio"
-  | "number-input"; //数字输入框
+  | "number"; //数字输入框
 
 type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 type InputPropsPayload<T = any> = Merge<
@@ -152,7 +152,7 @@ type KFormItemProps<T = any> = {
   /** 子表单项Key值，设置children时需要设置 **/
   rowKey?: string;
   /** 表单项类型 **/
-  type?: KFormItemPropsType;
+  type?: KFormItemType;
   /** tooltip提示，不传则不提示**/
   tooltip?: string;
   /** 是否展示 默认展示，传入函数时formValue为表单数据 **/
@@ -163,9 +163,20 @@ type KFormItemProps<T = any> = {
   slotName?: string;
 };
 
+interface KDynamicFormItemProps extends KFormItemProps {
+  next?:
+    | ((
+        formValue?: T,
+        currentKey?: string
+      ) => KDynamicFormItemProps | Array<KDynamicFormItemProps>)
+    | null;
+  parent?: KDynamicFormItemProps | null;
+}
+
 export type {
   KFormItemProps,
-  KFormItemPropsType,
+  KFormItemType,
+  KDynamicFormItemProps,
   InputPropsPayload,
   InputNumberPropsPayload,
   ISelectPropsPayload,

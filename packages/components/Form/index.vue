@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import FormItem from "../FormItem/index.vue";
-import { FormInstance } from "element-plus";
-import { onBeforeUnmount, ref } from "vue";
-import { formatPx } from "../../index";
+import { type Arrayable, FormInstance } from "element-plus";
+import { computed, onBeforeUnmount, ref, watch } from "vue";
+import { formatPx, KDynamicFormItemProps } from "../../index";
 import { KFormProps } from "../../types/form-props";
 defineOptions({
   name: "KForm"
@@ -24,6 +24,63 @@ const clearValidate = () => {
   return form.value.clearValidate();
 };
 
+const _dynamicOptions = ref<Array<KDynamicFormItemProps>>([]);
+function getDynamicList(dynamicItem: Arrayable<KDynamicFormItemProps>) {
+  if (Array.isArray(dynamicItem)) {
+    _dynamicOptions.value.push(...dynamicItem);
+    dynamicItem.forEach(item => {
+      if (item.next) {
+        getDynamicList(item.next(modelValue.value, item.key));
+      }
+    });
+    return;
+  }
+  _dynamicOptions.value.push(dynamicItem);
+  if (dynamicItem.next) {
+    getDynamicList(dynamicItem.next(modelValue.value, dynamicItem.key));
+  }
+}
+const _options = computed(() => {
+  if (!props.dynamicOptions) return props.options;
+  else return _dynamicOptions.value;
+});
+
+const watcher = watch(
+  () => modelValue.value,
+  () => {
+    if (!props.dynamicOptions) return;
+    _dynamicOptions.value = [];
+    getDynamicList(props.dynamicOptions());
+    const ls = [];
+    _dynamicOptions.value.map(item => {
+      if (item.rowKey) {
+        const row = ls.find(lsItem => lsItem.rowKey === item.rowKey);
+        if (!row) {
+          ls.push({
+            childrenNum: item.childrenNum,
+            rowKey: item.rowKey,
+            children: [item]
+          });
+        } else {
+          row.children.push(item);
+        }
+      } else {
+        ls.push(item);
+      }
+    });
+    _dynamicOptions.value = ls;
+    console.log(_options.value);
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+);
+
+onBeforeUnmount(() => {
+  watcher();
+});
+
 defineExpose({ validate, clearValidate });
 </script>
 
@@ -36,7 +93,7 @@ defineExpose({ validate, clearValidate });
     :style="{ width: formatPx(width) }"
     @validate="onValidate"
   >
-    <template v-for="item in options" :key="item.prop">
+    <template v-for="item in _options" :key="item.prop">
       <FormItem v-bind="item" v-model="modelValue" v-if="!item.children">
         <template v-if="item.type === 'custom'" v-slot:[item.slotName]>
           <slot :name="item.slotName"> </slot>
@@ -54,7 +111,7 @@ defineExpose({ validate, clearValidate });
       >
         <FormItem
           v-model="modelValue"
-          v-bind="item"
+          v-bind="child"
           v-for="child in item.children"
           :key="child.prop"
         >
