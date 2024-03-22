@@ -16,7 +16,7 @@ pnpm add @joooooooooojo/kform
 import { createApp } from "vue";
 import App from "./App.vue";
 import KForm from "@joooooooooojo/kform";
-
+import "@joooooooooojo/kform/dist/style.css";
 const app = createApp(App);
 
 // 组件依赖于ElementPlus，所以需要先安装ElementPlus
@@ -116,12 +116,61 @@ const options:Array<KFormItemProps> = [
   </KForm>
 </template>
 ```
+### 动态表单使用示例
+```ts
+const root = (): KDynamicFormItemProps => {
+  return {
+    rowKey: "row-1",
+    parent: null,
+    label: "客户名称",
+    prop: "name",
+    next: clientType
+  };
+};
+const clientType = (formValue?: T): KDynamicFormItemProps => {
+  return {
+    rowKey: "row-1",
+    parent: root,
+    label: "客户类型",
+    prop: "type",
+    type: "select",
+    payload: {
+      options: [
+        {
+          label: "企业",
+          value: 0
+        },
+        {
+          label: "个人",
+          value: 1
+        }
+      ]
+    } as ISelectPropsPayload,
+    next: formValue.type === 0 ? code : null
+  };
+};
+
+const code = (): KDynamicFormItemProps => {
+  return {
+    rowKey: "row-2",
+    childrenNum: 2,
+    parent: clientType,
+    label: "企业信用代码",
+    prop: "code",
+    next: null
+  };
+};
+```
+```vue
+<KForm v-model="baseForm" :dynamic-options="root"></KForm>
+```
 
 ### 表单类型
 | Property | Type | Description |
 | --- | --- | --- |
 | `width` | `string` | 表单宽度 默认100% |
 | `options` | `Array<KFormItemProps>` | 表单项配置 |
+| `dynamicOptions` | `() => Arrayable<KDynamicFormItemProps>` | 动态表单配置项 | 
 | `modelValue` | `Record<string, any>` | 表单数据模型 |
 | `rules` | `FormRules` | 表单校验规则 |
 | `labelPosition` | `KLabelPosition` | 表单标签位置 |
