@@ -116,8 +116,8 @@ defineExpose({ validate, clearValidate });
           v-for="child in item.children"
           :key="child.prop"
         >
-          <template v-if="item.type === 'custom'" v-slot:[item.slotName]>
-            <slot :name="item.slotName"> </slot>
+          <template v-if="child.type === 'custom'" v-slot:[child.slotName]>
+            <slot :name="child.slotName"> </slot>
           </template>
         </FormItem>
       </div>

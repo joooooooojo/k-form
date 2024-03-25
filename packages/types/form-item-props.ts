@@ -116,6 +116,8 @@ type DatePickerPropsPayload<T = any> = Merge<
 type RadioPropsPayload<T = any> = Merge<
   Partial<RadioProps>,
   {
+    label: string | number;
+    value: string | number;
     onChange?: (value: string | number | boolean) => void;
   }
 >;

@@ -39,7 +39,7 @@ const clientType = (formValue?: T): KDynamicFormItemProps => {
   };
 };
 
-const code = (): KDynamicFormItemProps => {
+const code = (): Array<KDynamicFormItemProps> => {
   return [
     {
       rowKey: "row-2",
@@ -50,7 +50,9 @@ const code = (): KDynamicFormItemProps => {
         },
         {
           label: "企业信用代码",
-          prop: "code"
+          prop: "code1",
+          type: "custom",
+          slotName: "aaa"
         }
       ]
     }
@@ -59,7 +61,11 @@ const code = (): KDynamicFormItemProps => {
 </script>
 
 <template>
-  <KForm v-model="form" width="600px" :dynamicOptions="root" />
+  <KForm v-model="form" width="600px" :dynamicOptions="root">
+    <template v-slot:aaa>
+      <el-input />
+    </template>
+  </KForm>
 </template>
 
 <style scoped></style>

@@ -103,10 +103,7 @@ const getRules = () => {
         v-bind="payload"
         @change="payload.onChange"
       >
-        <el-radio
-          v-for="(item, index) in options"
-          :prop="index"
-          :label="item.value"
+        <el-radio v-for="(item, index) in options" v-bind="item" :key="index"
           >{{ item.label }}
         </el-radio>
       </el-radio-group>
