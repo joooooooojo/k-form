@@ -24,6 +24,7 @@ const clientType = (formValue?: T): KDynamicFormItemProps => {
     prop: "type",
     type: "select",
     payload: {
+      clearable: true,
       options: [
         {
           label: "企业",
@@ -55,6 +56,12 @@ const code = (): Array<KDynamicFormItemProps> => {
           slotName: "aaa"
         }
       ]
+    },
+    {
+      rowKey: "row-3",
+      label: "证件照片",
+      type: "custom",
+      slotName: "card-image"
     }
   ];
 };
@@ -64,6 +71,16 @@ const code = (): Array<KDynamicFormItemProps> => {
   <KForm v-model="form" width="600px" :dynamicOptions="root">
     <template v-slot:aaa>
       <el-input />
+    </template>
+    <template v-slot:card-image>
+      <div>
+        <label for="card__positive">
+          <input id="upload-card__front" />
+        </label>
+        <label id="upload-card__back">
+          <input id="card__back" />
+        </label>
+      </div>
     </template>
   </KForm>
 </template>

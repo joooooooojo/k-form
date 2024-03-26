@@ -172,7 +172,6 @@ interface KDynamicFormItemProps extends KFormItemProps {
         currentKey?: string
       ) => KDynamicFormItemProps | Array<KDynamicFormItemProps>)
     | null;
-  parent?: KDynamicFormItemProps | null;
 }
 
 export type {
