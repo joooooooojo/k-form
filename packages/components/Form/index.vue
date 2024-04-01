@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import FormItem from "../FormItem/index.vue";
-import { FormInstance } from "element-plus";
+import { FormInstance, FormItemProp, FormValidateCallback } from "element-plus";
 import { computed, onBeforeUnmount, ref, watch } from "vue";
-import { formatPx, KDynamicFormItemProps } from "../../index";
+import { formatPx, KDynamicFormItemProps, KFormItemProps } from "../../index";
 import { KFormProps } from "../../types/form-props";
 type Arrayable<T> = T | T[];
 defineOptions({
@@ -16,14 +16,6 @@ const props = withDefaults(defineProps<KFormProps>(), {
 });
 
 const modelValue = defineModel<object>();
-
-const validate = () => {
-  return form.value.validate();
-};
-
-const clearValidate = () => {
-  return form.value.clearValidate();
-};
 
 const _dynamicOptions = ref<Array<KDynamicFormItemProps>>([]);
 function getDynamicList(dynamicItem: Arrayable<KDynamicFormItemProps>) {
@@ -82,7 +74,37 @@ onBeforeUnmount(() => {
   watcher();
 });
 
-defineExpose({ validate, clearValidate });
+const validate = () => {
+  return form.value.validate();
+};
+/** 清理某个字段的表单验证信息。**/
+const clearValidate = (props?: Arrayable<FormItemProp> | undefined) => {
+  return form.value.clearValidate(props);
+};
+
+/** 验证具体的某个字段。**/
+const validateField = (
+  props?: Arrayable<FormItemProp> | undefined,
+  callback?: FormValidateCallback | undefined
+) => {
+  return form.value.validateField(props, callback);
+};
+/** 重置该表单项，将其值重置为初始值，并移除校验结果**/
+const resetFields = (props?: Arrayable<FormItemProp> | undefined) => {
+  return form.value.resetFields(props);
+};
+/** 滚动到指定的字段**/
+const scrollToField = (prop: FormItemProp) => {
+  form.value.scrollToField(prop);
+};
+
+defineExpose({
+  validate,
+  clearValidate,
+  validateField,
+  resetFields,
+  scrollToField
+});
 </script>
 
 <template>

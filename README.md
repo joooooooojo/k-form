@@ -33,7 +33,7 @@ app.mount("#app");
 {
   "compilerOptions": {
     // ...
-    "types": ["@joooooooooojo/kform/volar"]
+    "types": ["@joooooooooojo/kform/global"]
   }
 }
 ```

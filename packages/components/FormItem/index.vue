@@ -38,21 +38,6 @@ const options = computed(() => {
     return props.payload.options;
   }
 });
-
-const getRules = () => {
-  const rules = [];
-  if (props.required) {
-    rules.push({
-      required: true,
-      message: props.label + "不能为空",
-      trigger: ["change", "blur"]
-    });
-  }
-  if (props.rules) {
-    return props.rules;
-  }
-  return rules;
-};
 </script>
 
 <template>
@@ -64,7 +49,7 @@ const getRules = () => {
       :label="label"
       :prop="prop"
       :required="required"
-      :rules="getRules()"
+      :rules="rules"
     >
       <el-date-picker
         v-if="type === 'date-picker'"
