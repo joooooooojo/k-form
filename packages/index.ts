@@ -16,7 +16,6 @@ export default KForm;
 export type {
   KFormItemProps,
   KFormItemType,
-  KDynamicFormItemProps,
   InputPropsPayload,
   InputNumberPropsPayload,
   ISelectPropsPayload,

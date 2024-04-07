@@ -2,7 +2,7 @@
 import FormItem from "../FormItem/index.vue";
 import { FormInstance, FormItemProp, FormValidateCallback } from "element-plus";
 import { computed, onBeforeUnmount, ref, watch } from "vue";
-import { formatPx, KDynamicFormItemProps, KFormItemProps } from "../../index";
+import { formatPx, KFormItemProps } from "../../index";
 import { KFormProps } from "../../types/form-props";
 type Arrayable<T> = T | T[];
 defineOptions({
@@ -17,8 +17,8 @@ const props = withDefaults(defineProps<KFormProps>(), {
 
 const modelValue = defineModel<object>();
 
-const _dynamicOptions = ref<Array<KDynamicFormItemProps>>([]);
-function getDynamicList(dynamicItem: Arrayable<KDynamicFormItemProps>) {
+const _dynamicOptions = ref<Array<KFormItemProps>>([]);
+function getDynamicList(dynamicItem: Arrayable<KFormItemProps>) {
   if (Array.isArray(dynamicItem)) {
     _dynamicOptions.value.push(...dynamicItem);
     dynamicItem.forEach(item => {
@@ -34,16 +34,16 @@ function getDynamicList(dynamicItem: Arrayable<KDynamicFormItemProps>) {
   }
 }
 const _options = computed(() => {
-  if (!props.dynamicOptions) return props.options;
+  if (typeof props.options !== "function") return props.options;
   else return _dynamicOptions.value;
 });
 
 const watcher = watch(
   () => modelValue.value,
   () => {
-    if (!props.dynamicOptions) return;
+    if (typeof props.options !== "function") return;
     _dynamicOptions.value = [];
-    getDynamicList(props.dynamicOptions());
+    getDynamicList(props.options());
     const ls = [];
     _dynamicOptions.value.map(item => {
       if (item.rowKey && !item.children) {
@@ -62,7 +62,6 @@ const watcher = watch(
       }
     });
     _dynamicOptions.value = ls;
-    console.log(_options.value);
   },
   {
     deep: true,

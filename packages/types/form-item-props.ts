@@ -163,21 +163,15 @@ type KFormItemProps<T = any> = {
   payload?: any;
   /** 插槽 **/
   slotName?: string;
-};
-
-interface KDynamicFormItemProps extends KFormItemProps {
+  /** 动态表单项 -- 下一项**/
   next?:
-    | ((
-        formValue?: any,
-        currentKey?: string
-      ) => KDynamicFormItemProps | Array<KDynamicFormItemProps>)
+    | ((formValue?: any, currentKey?: string) => Arrayable<KFormItemProps>)
     | null;
-}
+};
 
 export type {
   KFormItemProps,
   KFormItemType,
-  KDynamicFormItemProps,
   InputPropsPayload,
   InputNumberPropsPayload,
   ISelectPropsPayload,

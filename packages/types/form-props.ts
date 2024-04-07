@@ -1,5 +1,5 @@
 import { FormRules } from "element-plus";
-import { KDynamicFormItemProps, KFormItemProps } from "./form-item-props";
+import { KFormItemProps } from "./form-item-props";
 
 type KLabelPosition = "top" | "right" | "left";
 type KRequiredAsteriskPosition = "right" | "left";
@@ -10,9 +10,7 @@ type KFormProps = {
   /** 表单宽度 默认100% */
   width?: string;
   /** 表单项配置 */
-  options?: Array<KFormItemProps>;
-  /** 动态表单配置项 **/
-  dynamicOptions?: () => Arrayable<KDynamicFormItemProps>;
+  options?: Array<KFormItemProps> | (() => KFormItemProps);
   /** 表单数据模型 */
   modelValue: Record<string, any>;
   /** 表单校验规则 */
