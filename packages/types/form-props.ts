@@ -10,7 +10,7 @@ type KFormProps = {
   /** 表单宽度 默认100% */
   width?: string;
   /** 表单项配置 */
-  options?: Array<KFormItemProps> | (() => KFormItemProps);
+  options?: Array<KFormItemProps> | (() => Arrayable<KFormItemProps>);
   /** 表单数据模型 */
   modelValue: Record<string, any>;
   /** 表单校验规则 */

@@ -1,6 +1,6 @@
 {
   "name": "@joooooooooojo/kform",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": false,
   "description": "二次封装element-plus的Form表单",
   "keywords": [
@@ -49,8 +49,7 @@
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
-    "lib": "vite build && vue-tsc -p tsconfig.build.json",
-    "publish": "npm pub"
+    "lib": "vite build && vue-tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "vue": "^3.4.19",
