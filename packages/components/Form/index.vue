@@ -83,17 +83,18 @@ const clearValidate = (props?: Arrayable<FormItemProp> | undefined) => {
 
 /** 验证具体的某个字段。**/
 const validateField = (
-  props?: Arrayable<FormItemProp> | undefined,
+  /** 为每个表单项的prop值 **/
+  props?: Arrayable<string> | undefined,
   callback?: FormValidateCallback | undefined
 ) => {
   return form.value.validateField(props, callback);
 };
 /** 重置该表单项，将其值重置为初始值，并移除校验结果**/
-const resetFields = (props?: Arrayable<FormItemProp> | undefined) => {
+const resetFields = (props?: Arrayable<string> | undefined) => {
   return form.value.resetFields(props);
 };
 /** 滚动到指定的字段**/
-const scrollToField = (prop: FormItemProp) => {
+const scrollToField = (prop: string) => {
   form.value.scrollToField(prop);
 };
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { ISelectPropsPayload, KDynamicFormItemProps } from "../packages";
+import { ISelectPropsPayload } from "../packages";
 
 const form = ref({
   name: "",
@@ -16,7 +16,7 @@ const root = (): KDynamicFormItemProps => {
     next: clientType
   };
 };
-const clientType = (formValue?: T): KDynamicFormItemProps => {
+const clientType = (formValue?: T) => {
   return {
     rowKey: "row-1",
     parent: root,
@@ -40,7 +40,7 @@ const clientType = (formValue?: T): KDynamicFormItemProps => {
   };
 };
 
-const code = (): Array<KDynamicFormItemProps> => {
+const code = (): Array => {
   return [
     {
       rowKey: "row-2",

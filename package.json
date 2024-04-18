@@ -1,6 +1,6 @@
 {
   "name": "@joooooooooojo/kform",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": false,
   "description": "二次封装element-plus的Form表单",
   "keywords": [
@@ -42,7 +42,7 @@
   },
   "files": [
     "dist",
-    "volar.ts"
+    "volar.d.ts"
   ],
   "style": "dist/style.css",
   "sideEffects": false,

@@ -12,6 +12,7 @@ export const KForm = Object.assign(Form, {
     app.component(Form.name, Form);
   }
 });
+export type KFormInstance = InstanceType<typeof Form>;
 export default KForm;
 export type {
   KFormItemProps,
