@@ -8,7 +8,6 @@ import {
   InputNumberProps,
   InputProps,
   ISelectProps,
-  RadioProps,
   SwitchProps
 } from "element-plus";
 type Arrayable<T> = T | T[];
@@ -57,7 +56,7 @@ type ISelectPropsPayload<T = any> = Merge<
   {
     disabled?: ((formValue: T, prop: string) => boolean) | boolean;
     options?:
-      | ((formValue: T) => Array<SelectOptionType>)
+      | ((formValue: T, prop: string) => Array<SelectOptionType>)
       | Array<SelectOptionType>;
     onBlur?: (event: FocusEvent) => void;
     onFocus?: (event: FocusEvent) => void;
@@ -113,14 +112,32 @@ type DatePickerPropsPayload<T = any> = Merge<
     ) => void;
   }
 >;
-type RadioPropsPayload<T = any> = Merge<
-  Partial<RadioProps>,
-  {
-    label: string | number;
-    value: string | number;
-    onChange?: (value: string | number | boolean) => void;
-  }
->;
+type RadioPropsPayload<T = any> = {
+  /** 单选框按钮或边框按钮的大小**/
+  size: "default" | "large" | "small";
+  disabled?: ((formValue: T, prop: string) => boolean) | boolean;
+  /** 按钮形式的 Radio 激活时的文本颜色**/
+  textColor: string;
+  /** 按钮形式的 Radio 激活时的填充色和边框色**/
+  fill: string;
+  /** 输入时是否出发表单验证**/
+  validateEvent: boolean;
+  name: string;
+  id: string;
+  ariaLabel: string;
+  type: "default" | "button";
+  options: Array<RadioOption> | ((formValue: T, prop: string) => RadioOption[]);
+  onChange?: (value: string | number | boolean) => void;
+};
+
+type RadioOption = {
+  label: string | number;
+  value: string | number;
+  disabled: boolean;
+  border?: boolean;
+  size?: "large" | "default" | "small";
+  name: string;
+};
 
 type KFormItemProps<T = any> = {
   /** 和element原 prop不同只允许填写字符串，同时充当键名和校验的prop **/
