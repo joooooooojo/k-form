@@ -1,6 +1,6 @@
 {
   "name": "@joooooooooojo/kform",
-  "version": "1.1.4",
+  "version": "1.2.1",
   "private": false,
   "description": "二次封装element-plus的Form表单",
   "keywords": [

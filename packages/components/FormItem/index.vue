@@ -88,18 +88,18 @@ const options = computed(() => {
         v-bind="payload"
         @change="payload.onChange"
       >
-        <template v-if="payload.type === 'default'">
-          <el-radio v-for="(item, index) in options" v-bind="item" :key="index"
-            >{{ item.label }}
-          </el-radio>
-        </template>
-        <template v-else>
+        <template v-if="payload.type === 'button'">
           <el-radio-button
             v-for="(item, index) in options"
             v-bind="item"
             :key="index"
             >{{ item.label }}
           </el-radio-button>
+        </template>
+        <template v-else>
+          <el-radio v-for="(item, index) in options" v-bind="item" :key="index"
+            >{{ item.label }}
+          </el-radio>
         </template>
       </el-radio-group>
       <el-cascader
