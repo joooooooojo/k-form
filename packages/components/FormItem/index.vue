@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { KFormItemProps } from "../../types/form-item-props";
-
+import { get, set } from "lodash";
 const props = withDefaults(defineProps<KFormItemProps>(), {
   payload: {},
   show: true,
   showMessage: true
 });
-const model = defineModel();
+const model = defineModel<object>();
 
 const isShow = (show: KFormItemProps["show"]): boolean => {
   if (show === undefined) {
@@ -38,6 +38,9 @@ const options = computed(() => {
     return props.payload.options;
   }
 });
+const onUpdate = value => {
+  set(model.value, props.prop, value);
+};
 </script>
 
 <template>
@@ -54,7 +57,8 @@ const options = computed(() => {
       <el-date-picker
         v-if="type === 'date-picker'"
         v-bind="payload"
-        v-model="model[prop]"
+        :model-value="get(model, prop)"
+        @update:model-value="onUpdate"
         :disabled="_disabled()"
         @change="payload.onChange"
         @blur="payload.onBlur"
@@ -65,14 +69,16 @@ const options = computed(() => {
         @panel-change="payload.onPanelChange"
       />
       <el-switch
-        v-model="model[prop]"
+        :model-value="get(model, prop)"
+        @update:model-value="onUpdate"
         v-else-if="type === 'switch'"
         :disabled="_disabled()"
         v-bind="payload"
         @change="payload.onChange"
       />
       <el-color-picker
-        v-model="model[prop]"
+        :model-value="get(model, prop)"
+        @update:model-value="onUpdate"
         v-else-if="type === 'color'"
         v-bind="payload"
         :disabled="_disabled()"
@@ -82,7 +88,8 @@ const options = computed(() => {
         @activeChange="payload.onActiveChange"
       />
       <el-radio-group
-        v-model="model[prop]"
+        :model-value="get(model, prop)"
+        @update:model-value="onUpdate"
         v-else-if="type === 'radio'"
         :disabled="_disabled()"
         v-bind="payload"
@@ -103,7 +110,8 @@ const options = computed(() => {
         </template>
       </el-radio-group>
       <el-cascader
-        v-model="model[prop]"
+        :model-value="get(model, prop)"
+        @update:model-value="onUpdate"
         v-else-if="type === 'cascader'"
         v-bind="payload"
         :disabled="_disabled()"
@@ -116,7 +124,8 @@ const options = computed(() => {
         @expand-change="payload.onExpandChange"
       />
       <el-select
-        v-model="model[prop]"
+        :model-value="get(model, prop)"
+        @update:model-value="onUpdate"
         v-else-if="type === 'select'"
         v-bind="payload"
         :disabled="_disabled()"
@@ -137,7 +146,8 @@ const options = computed(() => {
       </el-select>
       <el-input-number
         v-bind="payload"
-        v-model="model[prop]"
+        :model-value="get(model, prop)"
+        @update:model-value="onUpdate"
         v-else-if="type === 'number'"
         @change="payload.onChange"
         @blur="payload.onBlur"
@@ -147,7 +157,8 @@ const options = computed(() => {
       <el-input
         v-else
         v-bind="payload"
-        v-model="model[prop]"
+        :model-value="get(model, prop)"
+        @update:model-value="onUpdate"
         :disabled="_disabled()"
         @change="payload.onChange"
         @input="payload.onInput"

@@ -35,6 +35,12 @@ type Merge<M, N> = Omit<M, Extract<keyof M, keyof N>> & N;
 type InputPropsPayload<T = any> = Merge<
   Partial<InputProps>,
   {
+    autosize:
+      | boolean
+      | {
+          maxRows: number;
+          minRows: number;
+        };
     disabled?: ((formValue: T, prop: string) => boolean) | boolean;
     onBlur?: (event: FocusEvent) => void;
     onFocus?: (event: FocusEvent) => void;
@@ -121,7 +127,7 @@ type CascaderPropsPayload<T = any> = {
   /**需要显示的 Tag 的最大数量 只有当 collapse-tags 设置为 true 时才会生效。**/
   maxCollapseTags: number;
   /**组件的空值配置 参考[config-provider](https://element-plus.org/zh-CN/component/config-provider.html#empty-values-configurations) **/
-  emptyValues: Array;
+  emptyValues: [];
   /**清空选项的值 参考 [config-provider](https://element-plus.org/zh-CN/component/config-provider.html#empty-values-configurations) **/
   valueOnClear: string | number | boolean | Function;
   onBlur?: (event: FocusEvent) => void;
