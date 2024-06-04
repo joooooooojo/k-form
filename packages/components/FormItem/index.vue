@@ -114,6 +114,7 @@ const onUpdate = value => {
         @update:model-value="onUpdate"
         v-else-if="type === 'cascader'"
         v-bind="payload"
+        v-bind:props="payload.props ?? payload._props"
         :disabled="_disabled()"
         @change="payload.onChange"
         @blur="payload.onBlur"

@@ -89,47 +89,46 @@ type ColorPickerPropsPayload<T = any> = Merge<
   }
 >;
 type CascaderPropsPayload<T = any> = {
-  modelValue: string | number | string[] | number[] | any;
-  options:
+  options?:
     | ((formValue: T, prop: string) => Array<CascaderOption>)
     | Array<CascaderOption>;
-  props: CascaderProps;
-  size: "large" | "default" | "small";
-  placeholder: string;
+  _props?: CascaderProps;
+  size?: "large" | "default" | "small";
+  placeholder?: string;
   disabled?: ((formValue: T, prop: string) => boolean) | boolean;
-  clearable: boolean;
+  clearable?: boolean;
   /**输入框中是否显示选中值的完整路径**/
-  showAllLevels: boolean;
+  showAllLevels?: boolean;
   /** 多选模式下是否折叠Tag**/
-  collapseTags: boolean;
+  collapseTags?: boolean;
   /** 当鼠标悬停于折叠标签的文本时，是否显示所有选中的标签。 要使用此属性，collapse-tags属性必须设定为 true**/
-  collapseTagsTooltip: boolean;
+  collapseTagsTooltip?: boolean;
   /** 用于分隔选项的字符**/
-  separator: string;
+  separator?: string;
   /** 该选项是否可以被搜索**/
-  filterable: boolean;
+  filterable?: boolean;
   /** 自定义搜索逻辑，第一个参数是node，第二个参数是keyword，返回的布尔值表示是否保留该选项**/
-  filterMethod: (node: CascaderNode, keyword: string) => boolean;
+  filterMethod?: (node: CascaderNode, keyword: string) => boolean;
   /** 搜索关键词正在输入时的去抖延迟，单位为毫秒**/
-  debounce: number;
+  debounce?: number;
   /** 过滤函数调用前，所要调用的钩子函数，该函数接收要过滤的值作为参数。 如果该函数的返回值是 false 或者是一个被拒绝的 Promise，那么接下来的过滤逻辑便不会执行。**/
-  beforeFilter: (value: string) => boolean;
+  beforeFilter?: (value: string) => boolean;
   /** 弹出内容的自定义类名**/
-  popperClass: string;
+  popperClass?: string;
   /** 弹层是否使用 teleport**/
-  teleported: boolean;
+  teleported?: boolean;
   /**是否将弹出的内容直接插入到 body 元素。 在弹出内容的边框定位出现问题时，可将该属性设置为 false**/
-  popperAppendToBody: boolean;
+  popperAppendToBody?: boolean;
   /** 标签类型**/
-  tagType: "success" | "info" | "warning" | "danger";
+  tagType?: "success" | "info" | "warning" | "danger";
   /**输入时是否触发表单的校验**/
-  validateEvent: boolean;
+  validateEvent?: boolean;
   /**需要显示的 Tag 的最大数量 只有当 collapse-tags 设置为 true 时才会生效。**/
-  maxCollapseTags: number;
+  maxCollapseTags?: number;
   /**组件的空值配置 参考[config-provider](https://element-plus.org/zh-CN/component/config-provider.html#empty-values-configurations) **/
-  emptyValues: [];
+  emptyValues?: [];
   /**清空选项的值 参考 [config-provider](https://element-plus.org/zh-CN/component/config-provider.html#empty-values-configurations) **/
-  valueOnClear: string | number | boolean | Function;
+  valueOnClear?: string | number | boolean | Function;
   onBlur?: (event: FocusEvent) => void;
   onFocus?: (event: FocusEvent) => void;
   onChange?: (value: CascaderValue) => void;

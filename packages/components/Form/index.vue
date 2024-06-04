@@ -74,7 +74,7 @@ onBeforeUnmount(() => {
 });
 
 const validate = () => {
-  return form.value.validate();
+  return form.value.validate;
 };
 /** 清理某个字段的表单验证信息。**/
 const clearValidate = (props?: Arrayable<FormItemProp> | undefined) => {
@@ -91,7 +91,7 @@ const validateField = (
 };
 /** 重置该表单项，将其值重置为初始值，并移除校验结果**/
 const resetFields = (props?: Arrayable<string> | undefined) => {
-  return form.value.resetFields(props);
+  form.value.resetFields(props);
 };
 /** 滚动到指定的字段**/
 const scrollToField = (prop: string) => {
