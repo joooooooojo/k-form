@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<KFormProps>(), {
   width: "auto"
 });
 
-const modelValue = defineModel<object>();
+const modelValue = defineModel<Record<string, unknown>>();
 
 const _dynamicOptions = ref<Array<KFormItemProps>>([]);
 function getDynamicList(dynamicItem: Arrayable<KFormItemProps>) {
@@ -118,15 +118,6 @@ defineExpose({
     @validate="onValidate"
   >
     <template v-for="item in _options" :key="item.prop">
-      {{
-        [
-          item.slotName,
-          item.payload?.append,
-          item.payload?.prefix,
-          item.payload?.prepend,
-          item.payload?.suffix
-        ].filter(_item => !isEmpty(_item))
-      }}
       <FormItem v-bind="item" v-model="modelValue" v-if="!item.children">
         <template
           v-for="slotName in [
