@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<KFormItemProps>(), {
   show: true,
   showMessage: true
 });
-const model = defineModel<object>();
+const model = defineModel<Record<string, unknown>>();
 
 const isShow = (show: KFormItemProps["show"]): boolean => {
   if (show === undefined) {
@@ -167,6 +167,18 @@ const onUpdate = value => {
         @focus="payload.onFocus"
         @clear="payload.onClear"
       >
+        <template v-if="payload.prefix" v-slot:prefix>
+          <slot :name="payload.prefix"></slot>
+        </template>
+        <template v-if="payload.append" v-slot:append>
+          <slot :name="payload.append"></slot>
+        </template>
+        <template v-if="payload.prepend" v-slot:prepend>
+          <slot :name="payload.prepend"></slot>
+        </template>
+        <template v-if="payload.suffix" v-slot:suffix>
+          <slot :name="payload.suffix"></slot>
+        </template>
       </el-input>
     </el-form-item>
   </el-tooltip>

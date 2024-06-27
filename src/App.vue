@@ -17,14 +17,19 @@ const options = (): KFormItemProps[] => {
   return [
     {
       label: "输入框1",
-      prop: "user.name"
+      prop: "user.name",
+      payload: {
+        prepend: "prepend"
+      } as InputPropsPayload
     }
   ];
 };
 </script>
 
 <template>
-  <KForm v-model="form" :options="options()" width="600px"> </KForm>
+  <KForm v-model="form" :options="options()" width="600px">
+    <template v-slot:prepend> 123 </template>
+  </KForm>
   {{ form }}
 </template>
 

@@ -4,6 +4,8 @@ import { FormInstance, FormItemProp, FormValidateCallback } from "element-plus";
 import { computed, onBeforeUnmount, ref, watch } from "vue";
 import { formatPx, KFormItemProps } from "../../index";
 import { KFormProps } from "../../types/form-props";
+import { isEmpty } from "lodash";
+
 type Arrayable<T> = T | T[];
 defineOptions({
   name: "KForm"
@@ -97,7 +99,6 @@ const resetFields = (props?: Arrayable<string> | undefined) => {
 const scrollToField = (prop: string) => {
   form.value.scrollToField(prop);
 };
-
 defineExpose({
   validate,
   clearValidate,
@@ -117,9 +118,27 @@ defineExpose({
     @validate="onValidate"
   >
     <template v-for="item in _options" :key="item.prop">
+      {{
+        [
+          item.slotName,
+          item.payload?.append,
+          item.payload?.prefix,
+          item.payload?.prepend,
+          item.payload?.suffix
+        ].filter(_item => !isEmpty(_item))
+      }}
       <FormItem v-bind="item" v-model="modelValue" v-if="!item.children">
-        <template v-if="item.type === 'custom'" v-slot:[item.slotName]>
-          <slot :name="item.slotName"> </slot>
+        <template
+          v-for="slotName in [
+            item.slotName,
+            item.payload?.append,
+            item.payload?.prefix,
+            item.payload?.prepend,
+            item.payload?.suffix
+          ].filter(_item => !isEmpty(_item))"
+          v-slot:[slotName]
+        >
+          <slot :name="slotName"></slot>
         </template>
       </FormItem>
       <div
@@ -138,8 +157,17 @@ defineExpose({
           v-for="child in item.children"
           :key="child.prop"
         >
-          <template v-if="child.type === 'custom'" v-slot:[child.slotName]>
-            <slot :name="child.slotName"> </slot>
+          <template
+            v-for="slotName in [
+              child.slotName,
+              child.payload?.append,
+              child.payload?.prefix,
+              child.payload?.prepend,
+              child.payload?.suffix
+            ].filter(_item => !isEmpty(_item))"
+            v-slot:[slotName]
+          >
+            <slot :name="slotName"></slot>
           </template>
         </FormItem>
       </div>

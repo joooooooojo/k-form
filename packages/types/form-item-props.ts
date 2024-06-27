@@ -41,6 +41,14 @@ type InputPropsPayload<T = any> = Merge<
           maxRows: number;
           minRows: number;
         };
+    /** 输入框头部内容，只对非 type="textarea" 有效**/
+    prefix: string;
+    /** 输入框后置内容（有分隔），只对非 type="textarea" 有效**/
+    append: string;
+    /** 输入框前置内容（有分隔），只对非 type="textarea" 有效**/
+    prepend: string;
+    /** 输入框尾部内容，只对非 type="textarea" 有效**/
+    suffix: string;
     disabled?: ((formValue: T, prop: string) => boolean) | boolean;
     onBlur?: (event: FocusEvent) => void;
     onFocus?: (event: FocusEvent) => void;
